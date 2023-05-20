@@ -1,0 +1,1172 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Justin's Portfolio</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link
+        href="https://fonts.googleapis.com/css2?family=IBM+Plex+Mono:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;1,100;1,200;1,300;1,400;1,500;1,600;1,700&family=Noto+Serif:ital,wght@0,400;0,700;1,400;1,700&display=swap"
+        rel="stylesheet">
+    <style>
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            font-size: 1.4rem;
+            font-family: 'IBM Plex Mono', monospace;
+            font-family: 'Noto Serif', serif;
+            color: white;
+        }
+
+        html {
+            font-size: 62.5%;
+            background-color: #101010;
+            height: 19000px;
+            /* scroll-behavior: smooth; */
+        }
+
+        body {
+            width: 100%;
+            height: 100%;
+            padding: 0 120px;
+        }
+
+        h2,
+        .heading {
+            font-family: 'IBM Plex Mono', monospace;
+        }
+
+        #navbar {
+            display: flex;
+            width: 100%;
+            height: 95px;
+            padding: 32px 120px;
+            justify-content: space-between;
+            align-items: center;
+            position: fixed;
+            top: 0;
+            left: 0;
+            z-index: 9999;
+        }
+
+        #logo {
+            font-size: 24px;
+            font-weight: 700;
+        }
+
+        #menu-bar {
+            display: flex;
+        }
+
+        #menu-bar p {
+            font-family: 'IBM Plex Mono', monospace;
+            margin-left: 12px;
+            margin-right: 12px;
+            color: rgba(255, 255, 255, .5);
+            cursor: pointer;
+            transition: all .3s;
+        }
+
+        #menu-bar p:hover {
+            color: white;
+            transition: all .3s;
+        }
+
+        #content-container {
+            position: fixed;
+            top: 0;
+            display: flex;
+            align-items: center;
+            /* width: 100%; */
+            height: 100vh;
+            z-index: 998;
+        }
+
+        #content {
+            width: 100%;
+        }
+
+        #content-projects {
+            width: 40%;
+            height: 150%;
+            background: white;
+            color: #101010;
+            position: fixed;
+            right: 0;
+            bottom: 0;
+            transform: translateY(100%);
+            border-radius: 25% 5% 0px 0px;
+            transition: all .3s;
+            z-index: 9999;
+        }
+
+        #projects {
+            width: 100%;
+            height: 100vh;
+            overflow: auto;
+            position: absolute;
+            color: #101010;
+            bottom: 0;
+            right: 0;
+            /* background: red; */
+            z-index: 9999;
+        }
+
+        .project {
+            width: 100%;
+            height: 100vh;
+            min-height: 500px;
+            color: #101010;
+            padding: 30px 100px 30px 70px;
+            display: flex;
+            justify-content: center;
+            align-items: flex-start;
+            flex-direction: column;
+            flex-wrap: wrap;
+        }
+
+        #innerContent {
+            height: 100%;
+        }
+
+        #text-cursor {
+            animation: blink 1s linear infinite;
+        }
+
+        #instruction {
+            position: absolute;
+            bottom: 40px;
+            left: 0;
+            width: 100%;
+            display: flex;
+            justify-content: center;
+            animation: blink 3s linear infinite;
+        }
+
+        .bling {
+            opacity: 0%;
+            animation: triple-blink 2s linear;
+            position: absolute;
+        }
+
+        .bling-container {
+            /* cursor: pointer; */
+        }
+
+        .bling-container:hover>.bling {
+            animation: triple-blink 2s linear infinite;
+            /* animation-play-state: running; */
+        }
+
+        .bling:nth-of-type(1),
+        .bling-container:hover>.bling:nth-last-of-type(1) {
+            animation-delay: .5s;
+        }
+
+        .bling:nth-of-type(2),
+        .bling-container:hover>.bling:nth-last-of-type(2) {
+            animation-delay: .1s;
+        }
+
+        #ctrl-v-btn-wrapper {
+            transition: all .5s;
+            cursor: pointer;
+            position: relative;
+        }
+
+        #ctrl-v-btn-wrapper:hover>#ctrl-v-btn {
+            transform: translate(3px, 3px);
+        }
+
+        #ctrl-v-btn {
+            position: relative;
+            background: #101010;
+            border-radius: 8px;
+            border: solid 1px white;
+            z-index: 100;
+            cursor: pointer;
+            transition: all .3s;
+        }
+
+        #ctrl-v-btn-shadow {
+            top: 0;
+            left: 0;
+            border-radius: 8px;
+            background: white;
+            position: absolute;
+            transform: translate(3px, 3px);
+            z-index: 1;
+            cursor: pointer;
+        }
+
+        .skill-string {
+            font-size: 40px;
+        }
+
+        @keyframes blink {
+            0% {
+                opacity: 0;
+            }
+
+            50% {
+                opacity: .3;
+            }
+
+            100% {
+                opacity: .7;
+            }
+        }
+
+
+        @keyframes triple-blink {
+            0% {
+                opacity: 1;
+            }
+
+            20% {
+                opacity: 0;
+            }
+
+            40% {
+                opacity: 1;
+            }
+
+            60% {
+                opacity: 0;
+            }
+
+            80% {
+                opacity: 1;
+            }
+
+            100% {
+                opacity: 0;
+            }
+        }
+    </style>
+</head>
+
+<body>
+    <div id="navbar">
+        <h2 id="logo">j.</h2>
+        <div id="menu-bar">
+            <p onclick="test1()">about</p>
+            <p onclick="test()">skill & projects</p>
+            <p>contact</p>
+        </div>
+    </div>
+    <div id="content-container">
+        <p id="content"><span id="innerContent"><span class="heading
+            
+            " style="font-size: 24px;">Hi!</span></span><span id="text-cursor">_</span>
+        </p>
+    </div>
+
+    <div id="content-projects">
+        <div id="projects"></div>
+    </div>
+    <!-- <div style="height: 23000px; position: relative;">
+        <div id="trial" style="bottom: 0; position: absolute; ">adfas</div>
+    </div> -->
+    <p id="instruction" class="heading">Scroll to view more</p>
+    <script>
+        let OS = ''
+        let navbar = document.getElementById("navbar");
+        let stickUp = false
+        let content = document.getElementById("innerContent");
+        let lastFontSize = "24px";
+        let lastFontColor = "white";
+        let lastFontWeight = 400;
+        let blockColor = "#4D5EFF";
+
+        let scrollTop = parseInt(document.documentElement.scrollTop);
+        let lastScrollTop = 0;
+
+        let isScrollingUp = null;
+
+        let cursor = document.getElementById("text-cursor");
+        cursor.style.fontSize = lastFontSize;
+
+        let animation1Done = false
+        let animation1DoneHeight = 4000
+        let animation1TransitionDone = false
+
+        let secondAnimationPopIDs = []
+        let animation2DoneHeight = 12600
+        let animation2Done = false
+        let animation2TransitionDone = false
+
+        let pasteBtnAdded = false
+        let pastedText = false
+        let pasteBtnString = 'click'
+
+        let animation3Done = false
+        let animation3DoneHeight = 15500
+
+        const TEXTS1 = [{
+            charIndex: 0,
+            endCharIndex: 15,
+            fontSize: 24,
+            fontColor: "white",
+            fontWeight: 400,
+            class: "heading",
+            textStart: 3,
+            id: "text1",
+            content: "Hi! My name is..."
+        }, {
+            charIndex: 16,
+            endCharIndex: 16,
+            content: null
+        }, {
+            charIndex: 17,
+            endCharIndex: 30,
+            fontSize: 56,
+            fontWeight: 700,
+            id: "text2",
+            content: "Justin. "
+        }, {
+            charIndex: 31,
+            endCharIndex: 70,
+            fontSize: 56,
+            fontWeight: 400,
+            id: "text3",
+            content: "A fullstack developer."
+        }, {
+            end: true,
+            charIndex: 71,
+            endCharIndex: 100000,
+            content: "",
+        }]
+
+        const TEXTS2 = [{
+            charIndex: 100,
+            endCharIndex: 130,
+            fontWeight: 400,
+            fontSize: 56,
+            fontColor: "white",
+            id: "text4",
+            content: "I'm passionate about creating "
+        }, {
+            charIndex: 131,
+            endCharIndex: 150,
+            fontColor: "#74CDFF",
+            fontWeight: 600,
+            id: "text5",
+            content: "engaging "
+        }, {
+            charIndex: 151,
+            endCharIndex: 154,
+            fontColor: "white",
+            fontWeight: 400,
+            id: "text6",
+            content: "and "
+        }, {
+            charIndex: 155,
+            endCharIndex: 170,
+            fontColor: "#BFF5B1",
+            fontWeight: 600,
+            id: "text7",
+            content: "user-friendly "
+        }, {
+            charIndex: 171,
+            endCharIndex: 195,
+            fontColor: "white",
+            fontWeight: 400,
+            id: "text8",
+            content: "applications that are both "
+        }, {
+            charIndex: 196,
+            endCharIndex: 205,
+            fontColor: "#F3A583",
+            fontWeight: 600,
+            id: "text9",
+            content: "functional "
+        }, {
+            charIndex: 206,
+            endCharIndex: 209,
+            fontColor: "white",
+            fontWeight: 400,
+            id: "text10",
+            content: "and "
+        }, {
+            charIndex: 210,
+            endCharIndex: 240,
+            fontColor: "#FBF5C1",
+            fontWeight: 600,
+            id: "text11",
+            content: "beautiful "
+        }, {
+            charIndex: 241,
+            endCharIndex: 243,
+            fontColor: "white",
+            fontWeight: 400,
+            id: "text12",
+            content: "."
+        }, {
+            end: true,
+            charIndex: 244,
+            endCharIndex: 100000,
+            content: "",
+        }]
+        const TEXTS3 = [{
+            id: "text13",
+            charIndex: 250,
+            endCharIndex: 273,
+            class: "heading",
+            fontWeight: 400,
+            fontSize: 20,
+            fontColor: "white",
+            content: "my skills are..."
+        }]
+        const skillList = [{
+            id: "javascript",
+            text: "Javascript"
+        }, {
+            id: "html",
+            text: "HTML",
+        }, {
+            id: "css",
+            text: "CSS",
+        }, {
+            id: "scss-sass",
+            text: "SCSS/SASS",
+        }, {
+            id: "nodejs",
+            text: "NodeJS",
+        }, {
+            id: "typescript",
+            text: "Typescript",
+        }, {
+            id: "vuejs",
+            text: "VueJS",
+        }, {
+            id: "angularjs",
+            text: "AngularJS",
+        }, {
+            id: "reactjs",
+            text: "ReactJS",
+        }, {
+            id: "nextjs",
+            text: "NextJS",
+        }, {
+            id: "react-native",
+            text: "React Native",
+        }, {
+            id: "firebase",
+            text: "Firebase",
+        }, {
+            id: "mongodb",
+            text: "MongoDB",
+        }, {
+            id: "mysql",
+            text: "MySQL",
+        }, {
+            id: "postgresql",
+            text: "PostgreSQL",
+        }, {
+            id: "sqlite",
+            text: "SQLite",
+        }, {
+            id: "php",
+            text: "PHP",
+        }, {
+            id: "laravel",
+            text: "Laravel",
+        }, {
+            id: "golang",
+            text: "Go Language",
+        }, {
+            id: "swift",
+            text: "Swift",
+        }]
+
+        const projects = [{
+            no: "01",
+            name: "POS System (WIP)",
+            description: "an eCommerce POS and Inventory system",
+            tech: ["nextjs", "reactjs", "javascript", "css", "scss-sass", "html", "postgresql", "golang",
+                "mongodb",
+            ],
+            link: "",
+            image: "",
+        }, {
+            no: "02",
+            name: "Kanban",
+            description: "a Kanban app",
+            tech: ["vuejs", "javascript", "css", "scss-sass", "html", "firebase", ],
+            link: "",
+        }, {
+            no: "03",
+            name: "Pokedex",
+            description: "a React Pokedex app integrated with Pokedex GraphQL API",
+            tech: ["reactjs", "javascript", "css", "html", ],
+            link: "",
+        }, {
+            no: "04",
+            name: "RulAR",
+            description: "an Augmented Reality iOS app made to measure lengths and areas",
+            tech: ["swift", "nodejs", "javascript", ],
+            link: "",
+        }]
+
+        const mult = 50
+        let lastJ = 0
+        let breakLoop = false;
+        let animating = false;
+        const test1 = () => {
+            animation1Done = false
+            animation1TransitionDone = false
+            animation2Done = false
+            animation2TransitionDone = false
+
+            pasteBtnAdded = false
+            pastedText = false
+            secondAnimationPopIDs = []
+            lastFontSize = "24px";
+            lastFontColor = "white";
+            lastFontWeight = 400;
+            window.scroll({
+                top: 0,
+                // behavior: "smooth"
+            })
+            content.innerHTML = ""
+        }
+        const test = () => {
+            console.log('wow')
+            animation1Done = true
+            animation1TransitionDone = true
+            animation2Done = true
+            animation2TransitionDone = true
+
+            pasteBtnAdded = false
+            pastedText = false
+            window.scroll({
+                top: 14000,
+                // behavior: "smooth"
+            })
+            // document.getElementById('trial').scrollIntoView()
+        }
+
+        const checkBrowser = () => {
+            var OSName = "Unknown OS";
+            if (navigator.userAgent.indexOf("Win") != -1) OSName = "Windows";
+            if (navigator.userAgent.indexOf("Mac") != -1) OSName = "Macintosh";
+            if (navigator.userAgent.indexOf("Linux") != -1) OSName = "Linux";
+            if (navigator.userAgent.indexOf("Android") != -1) OSName = "Android";
+            if (navigator.userAgent.indexOf("like Mac") != -1) OSName = "iOS";
+
+            if (OSName == "Windows") {
+                pasteBtnString = "ctrl + v"
+            }
+
+            if (OSName == "Macintosh") {
+                pasteBtnString = "command + v"
+            }
+
+            console.log('Your OS: ' + OSName);
+            OS = OSName
+        }
+        checkBrowser()
+
+        const blinkIcon = () => `<svg class='bling' width="38" height="50" viewBox="0 0 38 50" fill="none" xmlns="http://www.w3.org/2000/svg">
+<mask id="path-1-inside-1_65_176" fill="white">
+<path fill-rule="evenodd" clip-rule="evenodd" d="M19.6148 0C20.5902 12.4809 28.1333 22.4015 37.623 23.6841V23.965C27.6732 25.3098 19.8633 36.1505 19.5198 49.4818H19.496C19.1366 35.5343 10.6048 24.3131 0 23.8401V23.809C10.1361 23.357 18.3784 13.0857 19.4009 0H19.6148Z"/>
+</mask>
+<path fill-rule="evenodd" clip-rule="evenodd" d="M19.6148 0C20.5902 12.4809 28.1333 22.4015 37.623 23.6841V23.965C27.6732 25.3098 19.8633 36.1505 19.5198 49.4818H19.496C19.1366 35.5343 10.6048 24.3131 0 23.8401V23.809C10.1361 23.357 18.3784 13.0857 19.4009 0H19.6148Z" fill="#0E0E0E"/>
+<path d="M37.623 23.6841H40.623V21.0623L38.0249 20.7112L37.623 23.6841ZM19.6148 0L22.6057 -0.233719L22.3896 -3H19.6148V0ZM37.623 23.965L38.0249 26.938L40.623 26.5869V23.965H37.623ZM19.5198 49.4818V52.4818H22.4435L22.5188 49.5591L19.5198 49.4818ZM19.496 49.4818L16.497 49.5591L16.5723 52.4818H19.496V49.4818ZM0 23.8401H-3V26.7093L-0.133664 26.8372L0 23.8401ZM0 23.809L-0.133664 20.812L-3 20.9399V23.809H0ZM19.4009 0V-3H16.6262L16.4101 -0.233719L19.4009 0ZM38.0249 20.7112C30.4441 19.6866 23.5166 11.4227 22.6057 -0.233719L16.624 0.233719C17.6637 13.5392 25.8224 25.1165 37.2212 26.6571L38.0249 20.7112ZM40.623 23.965V23.6841H34.623V23.965H40.623ZM22.5188 49.5591C22.8405 37.0745 30.077 28.0122 38.0249 26.938L37.2212 20.9921C25.2693 22.6074 16.8861 35.2264 16.5208 49.4046L22.5188 49.5591ZM19.496 52.4818H19.5198V46.4818H19.496V52.4818ZM-0.133664 26.8372C8.25802 27.2114 16.1593 36.4532 16.497 49.5591L22.495 49.4046C22.1139 34.6155 12.9515 21.4148 0.133664 20.8431L-0.133664 26.8372ZM-3 23.809V23.8401H3V23.809H-3ZM16.4101 -0.233719C15.4521 12.0259 7.89082 20.4541 -0.133664 20.812L0.133664 26.8061C12.3813 26.2598 21.3047 14.1456 22.3918 0.233719L16.4101 -0.233719ZM19.6148 -3H19.4009V3H19.6148V-3Z" fill="white" mask="url(#path-1-inside-1_65_176)"/>
+</svg>
+`
+
+        function debounce(method, delay) {
+            clearTimeout(method._tId);
+            method._tId = setTimeout(function () {
+                method();
+            }, delay);
+        }
+
+        Element.prototype.remove = function () {
+            this.parentElement.removeChild(this);
+        }
+        NodeList.prototype.remove = HTMLCollection.prototype.remove = function () {
+            for (var i = this.length - 1; i >= 0; i--) {
+                if (this[i] && this[i].parentElement) {
+                    this[i].parentElement.removeChild(this[i]);
+                }
+            }
+        }
+
+        for (let j of TEXTS2) {
+
+            if (j.fontWeight > 400 && secondAnimationPopIDs.filter(el => el.id == j.id)
+                .length == 0) {
+                secondAnimationPopIDs.push({
+                    id: j.id,
+                    color: j.fontColor,
+                    addedBling: false
+                })
+            }
+        }
+
+        const firstAnimation = () => {
+            for (let j = 0; j < TEXTS1.length; j++) {
+                if (TEXTS1[j].charIndex * mult <= scrollTop && TEXTS1[j].endCharIndex * mult >= scrollTop && !
+                    animating) {
+                    let text = ""
+                    if (j !== lastJ || TEXTS1[j].end) {
+                        if (j !== lastJ) {
+                            if (!isScrollingUp) {
+                                if (TEXTS1[lastJ].id) {
+                                    let el = TEXTS1[lastJ]
+                                    let doc = document.getElementById(el.id)
+                                    if (lastFontColor !== el.fontColor || lastFontSize !== el.fontSize + "px" ||
+                                        lastFontWeight !== el.fontWeight) {
+                                        if (doc.style.fontSize != el
+                                            .fontSize + "px" || doc.style.fontWeight != el.fontWeight) {
+                                            animating = true
+                                            doc.style.transition = "all 1s"
+                                            doc.style.background = blockColor
+                                            document.body.style.overflow = "hidden"
+                                            cursor.style.display = "none"
+                                        }
+
+                                        setTimeout(() => {
+                                            animating = false
+                                            document.body.style.overflow = "auto"
+                                            cursor.style.display = ""
+                                            doc.style.background = ""
+                                        }, 700)
+                                        if (el.fontSize) {
+                                            doc.style.fontSize = el.fontSize + "px"
+                                            lastFontSize = el.fontSize + "px"
+                                            cursor.style.fontSize = el.fontSize + "px"
+                                        }
+                                        if (el.fontColor) {
+                                            doc.style.color = el.fontColor
+                                            lastFontColor = el.fontColor
+                                        }
+                                        if (el.fontWeight) {
+                                            doc.style.fontWeight = el.fontWeight
+                                            lastFontWeight = el.fontWeight
+                                        }
+                                    }
+                                }
+                            } else {
+                                for (let k = j; k >= 0; k--) {
+                                    let el = TEXTS1[j]
+                                    let doc = document.getElementById(el.id)
+                                    if (lastFontColor !== el.fontColor || lastFontSize !== el.fontSize + "px" ||
+                                        lastFontWeight !== el.fontWeight) {
+                                        console.log("hereee", {
+                                            doc,
+                                            animating
+                                        })
+                                        if (el.fontSize) {
+                                            doc.style.fontSize = el.fontSize + "px"
+                                            lastFontSize = el.fontSize + "px"
+                                            cursor.style.fontSize = el.fontSize + "px"
+                                        }
+                                        if (el.fontColor) {
+                                            doc.style.color = el.fontColor
+                                            lastFontColor = el.fontColor
+                                        }
+                                        if (el.fontWeight) {
+                                            doc.style.fontWeight = el.fontWeight
+                                            lastFontWeight = el.fontWeight
+                                        }
+                                    }
+                                    break;
+                                }
+                            }
+
+                            lastJ = j
+                        }
+
+                        if (TEXTS1[j].end && !animating) {
+                            for (let k = 0; k < TEXTS1.length; k++) {
+                                if (TEXTS1[k].content == null || TEXTS1[k].content == undefined) {
+                                    text += "<br/>"
+                                } else {
+                                    let styleString = " style='" + (TEXTS1[k].fontColor ? "color: " + TEXTS1[k]
+                                        .fontColor + ";" : "color: " + lastFontColor + ";")
+                                    styleString += TEXTS1[k].fontSize ? "font-size: " + TEXTS1[k].fontSize + "px;" :
+                                        "font-size: " + lastFontSize + ";"
+                                    styleString += TEXTS1[k].fontWeight ? "font-weight: " + TEXTS1[k].fontWeight +
+                                        ";" : "font-weight: " + lastFontWeight + ";"
+                                    styleString += "'"
+                                    text += "<span class='" + (TEXTS1[k].class || "") + "' id='" + TEXTS1[k].id +
+                                        "'" + styleString + ">" + TEXTS1[k]
+                                        .content + "</span>"
+                                }
+                            }
+                            console.log("got here?")
+                            content.innerHTML = text
+                            if (!animation1Done) {
+                                animation1Done = true
+                            }
+                        }
+                        break;
+                    } else {
+                        let val = parseInt(scrollTop / mult)
+                        for (let k = 0; k < j; k++) {
+                            if (!TEXTS1[k].content) {
+                                text += "<br/>"
+                            } else {
+                                let styleString = " style='" + (TEXTS1[k].fontColor ? "color: " + TEXTS1[k]
+                                    .fontColor + ";" : "color: " + lastFontColor + ";")
+                                styleString += TEXTS1[k].fontSize ? "font-size: " + TEXTS1[k].fontSize + "px;" :
+                                    "font-size: " + lastFontSize + ";"
+                                styleString += TEXTS1[k].fontWeight ? "font-weight: " + TEXTS1[k].fontWeight + ";" :
+                                    "font-weight: " + lastFontWeight + ";"
+                                styleString += "'"
+                                text += "<span class='" + (TEXTS1[k].class || "") + "' id='" + TEXTS1[k].id + "'" +
+                                    styleString + ">" + TEXTS1[k].content +
+                                    "</span>"
+                            }
+                        }
+                        console.log("or here?", TEXTS1[j].content.slice(0, val - TEXTS1[j].charIndex + (TEXTS1[j]
+                            .textStart || 0)))
+                        let styleString = " style='color: " + lastFontColor + ";"
+                        styleString += "font-size: " + lastFontSize + ";"
+                        styleString += "font-weight: " + lastFontWeight + ";"
+                        styleString += "'"
+                        content.innerHTML = text + "<span class='" + (TEXTS1[j].class || "") + "' id='" + TEXTS1[j]
+                            .id + "'" + styleString + ">" + TEXTS1[j]
+                            .content.slice(0, val - TEXTS1[j].charIndex + (TEXTS1[j].textStart || 0)) +
+                            "</span>"
+                        console.log("UMMM", text + "<span class='" + (TEXTS1[j].class || "") + "' id='" + TEXTS1[j]
+                            .id + "'" + styleString + ">" + TEXTS1[j]
+                            .content.slice(0, val - TEXTS1[j].charIndex + (TEXTS1[j].textStart || 0)) +
+                            "</span>", content.innerHTML)
+                        // breakLoop = true
+                        break;
+
+                    }
+                }
+            }
+        }
+
+        const secondAnimation = () => {
+            for (let j = 0; j < TEXTS2.length; j++) {
+
+                let text = ""
+                let val = parseInt(scrollTop / mult)
+                if (TEXTS2[j].charIndex * mult <= scrollTop && TEXTS2[j].endCharIndex * mult >= scrollTop && !
+                    animating) {
+                    if (TEXTS2[j].fontWeight > 400 && secondAnimationPopIDs.filter(el => el.id == TEXTS2[j].id)
+                        .length == 0) {
+                        secondAnimationPopIDs.push({
+                            id: TEXTS2[j].id,
+                            color: TEXTS2[j].fontColor,
+                            addedBling: false
+                        })
+                    }
+
+                    for (let k = 0; k < j; k++) {
+                        if (!TEXTS2[k].content) {
+                            text += "<br/>"
+                        } else {
+                            let styleString = " style='color: white;"
+                            styleString += "font-size: 56px;"
+                            styleString += "font-weight:" + TEXTS2[k].fontWeight + ";"
+                            styleString += "'"
+                            text += "<span class='" + (TEXTS2[k].class || "") + "' id='" + TEXTS2[k].id + "'" +
+                                styleString + ">" + TEXTS2[k].content +
+                                "</span>"
+                        }
+                    }
+
+                    if (TEXTS2[j].end && !animating && !animation2Done && !isScrollingUp) {
+
+                        content.innerHTML = text
+                        document.body.style.overflow = "hidden"
+                        animating = true
+
+                        setTimeout(() => {
+                            animating = false
+                            animation2Done = true
+
+                            for (let i of secondAnimationPopIDs) {
+                                document.getElementById(i.id).style.position = "relative"
+                                document.getElementById(i.id).classList.add("bling-container")
+                                if (!i.addedBling) {
+                                    i.addedBling = true;
+                                    document.getElementById(i.id).innerHTML += blinkIcon().split("bling'")
+                                        .join("bling' style='top: 0; right: 0;'")
+                                    document.getElementById(i.id).innerHTML += blinkIcon().split("bling'")
+                                        .join("bling' style='bottom: 0; left: -15px;'")
+                                }
+                                document.getElementById(i.id).style.fontWeight = 600
+                                document.getElementById(i.id).style.color = i.color
+                            }
+                            console.log({
+                                secondAnimationPopIDs
+                            })
+                            document.body.style.overflow = "auto"
+                        }, 700)
+
+                        console.log("test")
+                        // if (!animation1Done) {
+                        //     animation1Done = scrollTop + 100
+                        // }
+                    }
+
+                    if (!TEXTS2[j].end) {
+                        let styleString = " style='color: " + lastFontColor + ";"
+                        styleString += "font-size: 56px;"
+                        styleString += "font-weight:" + TEXTS2[j].fontWeight + ";"
+                        styleString += "'"
+                        content.innerHTML = text + "<span class='" + (TEXTS2[j].class || "") + "' id='" + TEXTS2[j]
+                            .id + "'" + styleString + ">" + TEXTS2[j]
+                            .content.slice(0, val - TEXTS2[j].charIndex + (TEXTS2[j].textStart || 0)) +
+                            "</span>"
+                    }
+                    break;
+                }
+
+
+            }
+        }
+
+        const showSkills = () => {
+            let contentProjects = document.getElementById('content-projects')
+            let pr = document.getElementById('projects')
+            pr.innerHTML = ""
+            document.getElementById('ctrl-v-btn-wrapper').style.opacity = 0
+            document.getElementById('ctrl-v-btn-wrapper').style.marginTop = 0
+            document.getElementById('ctrl-v-btn-wrapper').style.height = '0px'
+            contentProjects.style.transform = 'translateY(0%)'
+            pastedText = true
+            // document.body.style.overflow = 'hidden'
+
+            setTimeout(() => {
+                pasteBtnAdded = false
+                document.getElementById('ctrl-v-btn-wrapper').remove()
+            }, 500)
+            document.getElementById("content").style.width = "50%"
+            content.innerHTML += "<br class='skill-string'/><br class='skill-string'/><br class='skill-string'/>"
+            for (let i of skillList) {
+                content.innerHTML += "<span class='skill-string' id='" + i.id + "'>" + i.text + "</span>"
+                content.innerHTML += "<span class='skill-string'> / </span>"
+            }
+
+            for (let j of projects) {
+                pr.innerHTML += `<div id='${j.no}' class='project'>
+                <div style="display: flex; justify-content: flex-start; align-items: flex-start; width: 100%; margin-bottom: 24px;">
+                <div style="color: #101010; font-size: 24px; margin-right: 10px;">
+                    ${j.no}
+                </div>
+                <div style="color: #101010; font-size: 40px; font-weight: 600;">
+                    ${j.name}
+                </div>
+                </div>
+
+                <div class='heading' style="display: flex; width: 100%; color: #101010; font-size: 16px; margin-bottom: 30px;">
+                    ${j.description}
+                </div>
+                <div style="width: 120px; height: 37px;">
+                    <button class="heading" style="width: 100%; height: 100%; background: white; border: 1px #101010 solid; border-radius: 8px; color: #101010;">
+                        Visit Site
+                    </button>
+                </div>
+                </div>`
+            }
+
+            content.innerHTML = content.innerHTML.slice(0, content.innerHTML.length - 38)
+        }
+
+        const thirdAnimation = () => {
+            let val = parseInt(scrollTop / mult)
+            let doc = document.getElementById(TEXTS3[0].id)
+
+            if (!pastedText) {
+                document.getElementById("content").style.width = ""
+            }
+
+            if (scrollTop > (TEXTS3[0].endCharIndex + 25) * mult && !animating && doc && !animation3Done) {
+                if (!isScrollingUp) {
+                    console.log("l")
+                    if (doc.style.fontSize !== TEXTS3[0].fontSize + "px") {
+                        document.body.style.overflow = "hidden"
+                        animating = true
+                        doc.style.background = blockColor
+                        cursor.style.display = "none"
+
+                        doc.style.fontSize = TEXTS3[0].fontSize + "px"
+                        doc.style.fontWeight = TEXTS3[0].fontWeight
+                        cursor.style.fontSize = TEXTS3[0].fontSize + "px"
+                    }
+                    // console.log(TEXTS3[0])
+                    setTimeout(() => {
+                        // console.log("UM?!") 
+                        animating = false
+                        document.body.style.overflow = "auto"
+                        // cursor.style.display = ""
+                        doc.style.background = ""
+                        if (!pasteBtnAdded && !pastedText && !isScrollingUp && !animating) {
+                            animating = true
+                            pasteBtnAdded = true
+                            content.innerHTML +=
+                                "<div id='ctrl-v-btn-wrapper' onclick='showSkills()' style='height: 0; width: 128px; opacity: 0; margin-top: 0'><button id='ctrl-v-btn' style='height: 100%; width: 100%;'>" +
+                                pasteBtnString +
+                                "</button><div id='ctrl-v-btn-shadow' style='height: 100%; width: 100%'></div></div>"
+                            document.body.style.overflow = "hidden"
+                            setTimeout(() => {
+
+                                document.getElementById('ctrl-v-btn-wrapper').style.height = '50px'
+                                document.getElementById('ctrl-v-btn-wrapper').style.opacity = 1
+                                document.getElementById('ctrl-v-btn-wrapper').style.marginTop =
+                                    '20px'
+                                animation3Done = true
+                                setTimeout(() => {
+                                    animating = false
+                                    document.body.style.overflow = ""
+                                }, 500)
+                            }, 100)
+                        }
+                    }, 300)
+                } else {
+                    console.log("m", {
+                        animating,
+                        fontSize1: doc.style.fontSize,
+                        fontSIze2: TEXTS3[0].fontSize,
+                        animating,
+                        animation3Done
+                    })
+                    if (doc.style.fontSize == TEXTS3[0].fontSize + "px" && !animating) {
+                        console.log("1")
+                        document.body.style.overflow = "hidden"
+                        animating = true
+                        doc.style.background = blockColor
+                        cursor.style.display = "none"
+
+                        doc.style.fontSize = "56px"
+                        doc.style.fontWeight = TEXTS3[0].fontWeight
+                        cursor.style.fontSize = "56px"
+                        if (isScrollingUp && !stickUp) {
+                            console.log("2", animating)
+                            document.getElementsByClassName("skill-string").remove();
+                            document.getElementById('content-projects').style.transform = ''
+                            document.getElementById("content").style.width = ""
+                            // document.body.style.overflow = "hidden"
+                            pastedText = false
+                            if (pasteBtnAdded) {
+                                console.log("3")
+                                // animating = true
+                                document.getElementById('ctrl-v-btn-wrapper').style.opacity = 0
+                                document.getElementById('ctrl-v-btn-wrapper').style.marginTop = 0
+                                document.getElementById('ctrl-v-btn-wrapper').style.height = '0px'
+                                animation3Done = false
+
+                                setTimeout(() => {
+                                    document.getElementById('ctrl-v-btn-wrapper').remove()
+                                    pasteBtnAdded = false
+                                    // document.body.style.overflow = ""
+                                    // animating = false
+                                }, 800)
+                                // content.innerHTML +=
+                                //     "<div id='ctrl-v-btn-wrapper'><button>ctrl + v</button><div id='ctrl-v-btn-shadow'></div></div>"
+                            }
+                        }
+                        setTimeout(() => {
+                            animating = false
+                            document.body.style.overflow = "auto"
+                            cursor.style.display = ""
+                            doc.style.background = ""
+                        }, 800)
+                    }
+                    // console.log(TEXTS3[0])
+                }
+            } else if (!animating && !animation3Done) {
+                console.log("here instead?")
+                let styleString = " style='color: white;"
+                styleString += "font-size: 56px;"
+                styleString += "font-weight: 400;"
+                styleString += "'"
+                content.innerHTML = "<span class='" + (TEXTS3[0].class || "") + "' id='" + TEXTS3[0]
+                    .id + "'" + styleString + ">" + TEXTS3[0]
+                    .content.slice(0, val - TEXTS3[0].charIndex) +
+                    "</span>"
+                document.getElementById(TEXTS3[0].id).style.transition = "all .5s"
+            }
+        }
+
+        function scrollFunc() {
+            // try {
+            scrollTop = parseInt(document.documentElement.scrollTop);
+            if (scrollTop > 50) {
+                document.getElementById("instruction").style.animation = "none";
+                document.getElementById("instruction").style.opacity = 0;
+                document.getElementById("instruction").style.transition = "all .3s";
+            } else {
+                document.getElementById("instruction").style.animation = "";
+                document.getElementById("instruction").style.opacity = 0;
+                document.getElementById("instruction").style.transition = "all .3s";
+            }
+            if (scrollTop > lastScrollTop) {
+                isScrollingUp = false;
+            } else {
+                isScrollingUp = true;
+            }
+            lastScrollTop = scrollTop
+            if (scrollTop > animation1DoneHeight && !isScrollingUp) {
+                animation1Done = true
+            }
+            if (!animation1Done) {
+                // console.log("called?")
+                firstAnimation()
+            }
+
+            if (animation1Done) {
+                if (scrollTop > animation1DoneHeight) {
+                    if (!animation1TransitionDone) {
+                        document.body.style.overflow = "hidden"
+                        for (let c of content.children) {
+                            c.style.background = blockColor
+                        }
+                        cursor.style.display = "none"
+                        setTimeout(() => {
+                            animation1TransitionDone = true
+                            content.innerHTML = ""
+                            setTimeout(() => document.body.style.overflow = "auto", 600)
+                            cursor.style.display = ""
+                            for (let c of content.children) {
+                                c.style.background = ""
+                            }
+                        }, 700)
+                    } else if (!animation2Done) {
+                        secondAnimation()
+                    }
+                }
+            }
+
+            if (animation2Done) {
+                if (scrollTop > animation2DoneHeight) {
+                    if (!animation2TransitionDone) {
+                        document.body.style.overflow = "hidden"
+                        for (let c of content.children) {
+                            c.style.background = blockColor
+                        }
+                        cursor.style.display = "none"
+                        setTimeout(() => {
+                            animation2TransitionDone = true
+                            content.innerHTML = ""
+                            setTimeout(() => document.body.style.overflow = "auto", 600)
+                            cursor.style.display = ""
+                            for (let c of content.children) {
+                                c.style.background = ""
+                            }
+                        }, 700)
+                    } else {
+                        thirdAnimation()
+
+                        if (animation3DoneHeight <= scrollTop && !isScrollingUp) {
+                            if (!stickUp) {
+                                navbar.style.position = "absolute"
+                                navbar.style.top = scrollTop + "px"
+                                document.getElementById('content-container').style.position = "absolute"
+                                document.getElementById('content-container').style.top = animation3DoneHeight + "px"
+                                stickUp = true
+                            }
+                        } else if (isScrollingUp && animation3DoneHeight > scrollTop) {
+                            console.log("test?")
+                            animation3Done = false
+                            stickUp = false
+                            navbar.style.position = "fixed";
+                            navbar.style.top = 0;
+                            document.getElementById('content-container').style.position = ""
+                            document.getElementById('content-container').style.top = ""
+                        }
+                    }
+                }
+            }
+            // console.log({
+            //     isScrollingUp,
+            //     scrollTop,
+            //     animation1DoneHeight
+            // })
+            if (isScrollingUp && animation1DoneHeight >= scrollTop) {
+                animation1Done = false
+                animation1TransitionDone = false
+                secondAnimationPopIDs.map(el => {
+                    el.addedBling = false;
+                    return el
+                })
+                animation2Done = false
+                animation2TransitionDone = false
+                animation3Done = false
+                pasteBtnAdded = false
+                firstAnimation()
+                console.log({
+                    c: !content.innerHTML,
+                    content,
+                    cc: content.innerHTML
+                })
+            } else if (isScrollingUp && animation2DoneHeight >= scrollTop) {
+                secondAnimationPopIDs.map(el => {
+                    el.addedBling = false;
+                    return el
+                })
+                animation2Done = false
+                animation2TransitionDone = false
+                animation3Done = false
+                pasteBtnAdded = false
+                secondAnimation()
+            } else if (isScrollingUp && animation3Done >= scrollTop) {
+                console.log("here?")
+                animation3Done = false
+                pasteBtnAdded = false
+                thirdAnimation()
+            }
+            // if (scrollTop >= 500) {
+            //     if (!stickUp) {
+            //         navbar.style.position = "absolute"
+            //         navbar.style.top = scrollTop + "px"
+            //         stickUp = true
+            //     }
+            // } else {
+            //     stickUp = false
+            //     navbar.style.position = "fixed";
+            //     navbar.style.top = 0;
+            // }
+            // } catch (e) {
+            //     console.log({
+            //         e
+            //     })
+            //     // document.body.style.overflow = "hidden"
+            //     // document.documentElement.scrollTop = 0
+            //     // debounce(() => document.body.style.overflow = "auto", 3000)
+            // }
+        }
+        addEventListener("loadstart", () => document.documentElement.scrollTop = 0)
+        addEventListener("load", () => document.documentElement.scrollTop = 0)
+        addEventListener("beforeunload", () => document.documentElement.scrollTop = 0)
+        addEventListener("scrollEnd", () => console.log("SCROLLEND", document.documentElement.scrollTop))
+        document.addEventListener("scroll", scrollFunc);
+        document.onkeydown = function (e) {
+            e = e || window.event;
+            var charCode = (typeof e.which == "number") ? e.which : e.keyCode;
+            console.log(e)
+            if (charCode && String.fromCharCode(charCode) == "V") {
+                if (OS == "Windows" && e.ctrlKey && !pastedText) {
+                    showSkills()
+                }
+
+                if (OS == "Macintosh" && e.metaKey && !pastedText) {
+                    showSkills()
+                }
+                console.log("Character typed: " + String.fromCharCode(charCode));
+
+            }
+        };
+
+        addEventListener("resize", () => {
+            checkBrowser()
+        })
+        // document.onkeyup
+    </script>
+</body>
+
+</html>
